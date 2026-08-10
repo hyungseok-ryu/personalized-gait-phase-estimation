@@ -13,10 +13,31 @@ class PreparedTrial:
     heel_strikes: np.ndarray
 
 
-def _read_csv_numeric(path: str | Path) -> np.ndarray:
-    data = np.genfromtxt(path, delimiter=",", skip_header=1)
-    if data.ndim != 2 or not np.isfinite(data).all():
-        raise ValueError(f"Expected a finite numeric CSV: {path}")
+def _read_csv_columns(
+    path: str | Path,
+    column_aliases: tuple[tuple[str, ...], ...],
+) -> np.ndarray:
+    table = np.genfromtxt(
+        path,
+        delimiter=",",
+        names=True,
+        dtype=np.float64,
+        encoding="utf-8",
+    )
+    if table.ndim == 0:
+        table = table.reshape(1)
+    available = set(table.dtype.names or ())
+    selected = []
+    for aliases in column_aliases:
+        name = next((alias for alias in aliases if alias in available), None)
+        if name is None:
+            raise ValueError(
+                f"Expected one of {aliases} in {path}; found {sorted(available)}."
+            )
+        selected.append(np.asarray(table[name], dtype=np.float64))
+    data = np.column_stack(selected)
+    if not np.isfinite(data).all():
+        raise ValueError(f"Expected finite numeric columns in {path}.")
     return data
 
 
@@ -44,13 +65,27 @@ def compute_alignment_matrix(
     side = affected_side.upper()
     if side not in {"L", "R"}:
         raise ValueError("affected_side must be either 'L' or 'R'.")
-    reference_static = _read_csv_numeric(reference_static_path)
-    reference_walking = _read_csv_numeric(reference_walking_path)
-    participant_static = _read_csv_numeric(participant_static_path)
+    acceleration_columns = (
+        ("linear_acceleration_x", "acc_x"),
+        ("linear_acceleration_y", "acc_y"),
+        ("linear_acceleration_z", "acc_z"),
+    )
+    angular_velocity_columns = (
+        ("angular_velocity_x", "gyro_x"),
+        ("angular_velocity_y", "gyro_y"),
+        ("angular_velocity_z", "gyro_z"),
+    )
+    reference_static = _read_csv_columns(reference_static_path, acceleration_columns)
+    reference_walking_gyro = _read_csv_columns(
+        reference_walking_path, angular_velocity_columns
+    )
+    participant_static = _read_csv_columns(
+        participant_static_path, acceleration_columns
+    )
 
     gravity_reference = _normalize(reference_static[:, :3].mean(axis=0))
     gravity_participant = _normalize(participant_static[:, :3].mean(axis=0))
-    sagittal_reference = _principal_axis(reference_walking[:, 3:6])
+    sagittal_reference = _principal_axis(reference_walking_gyro)
     sagittal_participant = _principal_axis(calibration_walking[:, 3:6])
 
     if side == "L" and sagittal_participant[-1] < 0:
