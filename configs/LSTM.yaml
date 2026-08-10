@@ -1,0 +1,5 @@
+hidden_size: 256
+num_layers: 2
+dropout: 0.4
+input_size: 7
+num_classes: 3

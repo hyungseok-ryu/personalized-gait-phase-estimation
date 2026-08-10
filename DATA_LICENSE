@@ -1,0 +1,19 @@
+Dataset license
+
+The contents of `stroke_walking_dataset/`, the FSR-derived annotations in
+`configs/public_dataset_manifest.yaml`, the scaler in
+`configs/angle_input_scalers.yaml`, and the reference recordings in
+`configs/reference_data/` are licensed under the Creative Commons Attribution
+4.0 International License (CC BY 4.0).
+
+You may share and adapt this material for any purpose, provided that you give
+appropriate credit, provide a link to the license, and indicate whether changes
+were made. No additional restrictions may be applied.
+
+License deed and legal code:
+https://creativecommons.org/licenses/by/4.0/
+
+Suggested attribution:
+"Personalized Gait-Phase Estimation Stroke Walking Dataset," 2026, licensed
+under CC BY 4.0. Please also cite the associated paper when using the dataset in
+academic work.

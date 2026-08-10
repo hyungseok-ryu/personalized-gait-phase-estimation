@@ -1,0 +1,12 @@
+input_channels: 7
+d_model: 64
+nhead: 4
+num_encoder_layers: 3
+num_decoder_layers: 0
+dim_feedforward: 256
+trans_dropout: 0.1
+head_dropout: 0.1
+head_hidden: 64
+out_dim: 3
+max_len: 256
+num_classes: 3

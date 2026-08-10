@@ -1,0 +1,11 @@
+kernel_size: 9
+dropout: 0.5
+tcn_channels:
+  - 32
+  - 64
+  - 128
+  - 64
+  - 32
+input_size: 7
+num_classes: 3
+dilation_mode: exp
