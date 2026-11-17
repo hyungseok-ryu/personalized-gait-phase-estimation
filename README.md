@@ -1,5 +1,18 @@
 # Two-Stage Gait-Phase Personalization
 
+## Paper
+
+**Two-Stage Personalized Gait Phase Estimation in Stroke Survivors During Exoskeleton-Assisted Walking: An Offline Feasibility Study**
+
+- Authors: Hyungseok Ryu and Pilwon Hur (corresponding author)
+- Journal: *IEEE Transactions on Neural Systems and Rehabilitation Engineering* (accepted for publication, November 2026)
+- Preprint: [arXiv:2609.14984](https://doi.org/10.48550/arXiv.2609.14984)
+- Journal DOI: to be added once assigned
+
+If you use this code, the pretrained checkpoints, or the walking dataset, please cite this paper.
+
+## Overview
+
 This directory contains the reference training implementation of the primary method described in the paper:
 
 1. Stage 1 participant-specific calibration using an LwF-regularized objective.
