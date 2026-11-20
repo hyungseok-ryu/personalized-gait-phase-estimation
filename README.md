@@ -7,7 +7,7 @@
 - Authors: Hyungseok Ryu and Pilwon Hur (corresponding author)
 - Journal: *IEEE Transactions on Neural Systems and Rehabilitation Engineering* (accepted for publication, November 2026)
 - Preprint: [arXiv:2609.14984](https://doi.org/10.48550/arXiv.2609.14984)
-- Journal DOI: to be added once assigned
+- DOI: [10.1109/TNSRE.2026.3755732](https://doi.org/10.1109/TNSRE.2026.3755732)
 
 If you use this code, the pretrained checkpoints, or the walking dataset, please cite this paper.
 
